@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-php-backend-deployment
+  namespace: php
   labels:
     app: my-php-backend
 spec:
@@ -16,12 +17,14 @@ spec:
     spec:
       containers:
       - name: my-php-backend
-        image: fahdinov/my_php_backend:latest
+        image: fahdinov/my-php-backend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
+          name: http-web-svc
         env:
         - name: MARIADB_HOST
-          value: "mariadb-release.mariadb.svc.cluster.local"
+          value: "mariadb.mariadb.svc.cluster.local"
         - name: MARIADB_ROOT_USER
           value: "root"
         - name: MARIADB_ROOT_PASSWORD

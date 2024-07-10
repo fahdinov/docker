@@ -2,7 +2,7 @@ services:
   backend: 
     # image: rafex/php-nginx
     build: .
-    image: my_php_backend
+    image: my-php-backend
     environment:
       MARIADB_HOST: db
       MARIADB_ROOT_USER: root

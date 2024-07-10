@@ -34,10 +34,19 @@ mariadb:
     image:
       registry: docker.io
       repository: bitnami/mysqld-exporter
-      tag: 0.15.1-debian-12-r16  
+      tag: 0.15.1-debian-12-r16
     serviceMonitor:
       enabled: true
-networkPolicy:
-  ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources
-  ##
-  enabled: false
+  initdbScripts:
+    init.sql: |
+      use phpdb;
+      CREATE TABLE `users` (
+        `id` int(11) NOT NULL auto_increment,
+        `name` varchar(100) NOT NULL,
+        `age` int(3) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        PRIMARY KEY  (`id`)
+      );
+
+# initdbScriptsConfigMap: my-initdb-scripts
+namespace: mariadb

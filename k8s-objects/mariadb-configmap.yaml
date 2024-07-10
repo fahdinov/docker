@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-mariadb-scripts
+  namespace: mariadb
+data:
+  01-init.sql: |
+    use phpdb;
+    CREATE TABLE `users` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(100) NOT NULL,
+      `age` int(3) NOT NULL,
+      `email` varchar(100) NOT NULL,
+      PRIMARY KEY  (`id`)
+    );
+

@@ -4,6 +4,7 @@ $databaseHost = getenv("MARIADB_HOST");
 $databaseUsername = getenv("MARIADB_ROOT_USER");
 $databasePassword = getenv("MARIADB_ROOT_PASSWORD");
 $databaseName = getenv("MARIADB_DATABASE");
+echo $databaseHost;
 
 // Connect to the database
 $mysqli = new mysqli($databaseHost, $databaseUsername, $databasePassword, $databaseName); 

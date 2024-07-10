@@ -1,0 +1,43 @@
+# Default values for mariadb-basic-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# sealedSecret:
+#   enabled: true
+#   name: &sealedSecret "secret-mariadb"
+#   encryptedData:
+#     mariadb-password: AgCsU+iqcpvMoimOLbZdasYu1wvvaWoP/9EFxdKXel/8j8g/j9Jy5Hk17gj849qZCnsDbpDLHunMSz7gQEPtE2Xh8QQZHZfndRWZiRp8hgnTMbBxyux22PwvHn/i2NshCwSmpYmINB43hoAIJqPDz5MnA6Fj56mOe0178qOojMXGGNxQeQT2ozVHdO9CrAO/JyM1CZ3uWzw2Ne42tGyMheVAd51dnZ8rCihIcmORs5ZsMKH8AH5yhHdj3NTMqRS0rkd67SpDBRZXgFP/o3zr7c9a4cWtjGtzgcI6S87xT74uX8SOngzg55x3oZS2/DEdP9leu3HBLymDlpPnvbK+AwNzvNwvy9rCmMdvppbxmxfgf1Jka20K4jx68R6PjuUdsn2kmamC4eQCH6kbKybydditlZ9mQA0SsKGdgPmbqxUmCZtJ5RouQtkr3LWUccmtiF71wqKPNmgkE0cF9QXqt2EwOcAuHU15pDm6tF9Z2wgIEndwAQ+wunRqvucEittK2KaIbJ/86aIWnAA5kQpLEBc0WewNBQCH1ZNqqxSC7wcKq7yphKSE6XOFV2gF/Ww+TfryKVajj0ZoIyBS/e8MhCbI36VXmhgNmg3hbkKMfPfC8VXi844iRb5pu6QPUY3fprh/w3feHsDx4FJZePKHzoRCghMfJ59ZhX4YdRzi5Z5dv8NnXcgz3VkhhpwAR8Ea18ZwNv1p
+#     mariadb-root-password: AgCsU+iqcpvMoimOLbZdasYu1wvvaWoP/9EFxdKXel/8j8g/j9Jy5Hk17gj849qZCnsDbpDLHunMSz7gQEPtE2Xh8QQZHZfndRWZiRp8hgnTMbBxyux22PwvHn/i2NshCwSmpYmINB43hoAIJqPDz5MnA6Fj56mOe0178qOojMXGGNxQeQT2ozVHdO9CrAO/JyM1CZ3uWzw2Ne42tGyMheVAd51dnZ8rCihIcmORs5ZsMKH8AH5yhHdj3NTMqRS0rkd67SpDBRZXgFP/o3zr7c9a4cWtjGtzgcI6S87xT74uX8SOngzg55x3oZS2/DEdP9leu3HBLymDlpPnvbK+AwNzvNwvy9rCmMdvppbxmxfgf1Jka20K4jx68R6PjuUdsn2kmamC4eQCH6kbKybydditlZ9mQA0SsKGdgPmbqxUmCZtJ5RouQtkr3LWUccmtiF71wqKPNmgkE0cF9QXqt2EwOcAuHU15pDm6tF9Z2wgIEndwAQ+wunRqvucEittK2KaIbJ/86aIWnAA5kQpLEBc0WewNBQCH1ZNqqxSC7wcKq7yphKSE6XOFV2gF/Ww+TfryKVajj0ZoIyBS/e8MhCbI36VXmhgNmg3hbkKMfPfC8VXi844iRb5pu6QPUY3fprh/w3feHsDx4FJZePKHzoRCghMfJ59ZhX4YdRzi5Z5dv8NnXcgz3VkhhpwAR8Ea18ZwNv1p
+
+mariadb:
+  image:
+    registry: docker.io
+
+    repository: bitnami/mariadb
+    tag: 10.8.8-debian-11-r5
+  architecture: standalone
+  primary:
+    podSecurityContext:
+      enabled: false
+    containerSecurityContext:
+      enabled: false
+  secondary:
+    name: secondary
+  auth:
+    # existingSecret: *sealedSecret
+    database: "phpdb"
+    username: "fahd"
+    rootPassword: "root"
+    password: "fahd"
+  metrics:
+    enabled: true
+    image:
+      registry: docker.io
+      repository: bitnami/mysqld-exporter
+      tag: 0.15.1-debian-12-r16  
+    serviceMonitor:
+      enabled: true
+networkPolicy:
+  ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources
+  ##
+  enabled: false

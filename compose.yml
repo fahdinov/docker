@@ -1,0 +1,28 @@
+services:
+  backend: 
+    # image: rafex/php-nginx
+    build: .
+    image: my_php_backend
+    environment:
+      MARIADB_HOST: db
+      MARIADB_ROOT_USER: root
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_PORT: 3306
+      MARIADB_DATABASE: phpdb
+    ports:
+      - "8080:80"
+    networks:
+      - internal
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: phpdb
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

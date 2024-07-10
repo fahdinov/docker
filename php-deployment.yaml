@@ -5,7 +5,7 @@ metadata:
   labels:
     app: my-php-backend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: my-php-backend
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-php-backend
-        image: fahdinov/my_php_backend:0.0.2
+        image: fahdinov/my_php_backend:latest
         ports:
         - containerPort: 80
         env:
